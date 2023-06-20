@@ -1,4 +1,24 @@
 extends ../layouts/auth
 
 block content
-  h1 Login
+  h1
+    i.bi.bi-box-arrow-in-right
+    span.ms-2 Welcome to My Website
+  hr
+  form(action="/auth/login" method="post")
+    .mb-3
+      label#inputEmail.form-label
+        i.bi.bi-envelope
+        span.ms-1 Email Addrees:
+      input#inputEmail.form-control(type="email" name="email" required)
+    .mb-3
+      label#inputPassword.form-label
+        i.bi.bi-key
+        span.ms-1 Password:
+      input#inputPassword.form-control(type="password" name="password" required)
+    .d-grid.mt-4
+      button.btn.btn-secondary Login
+  .bg-secondary.bg-opacity-25.p-3.mt-4
+    .d-grid
+      h2.h4.text-center Do you have account ?
+      a.btn.btn-primary.mt-2(href="/auth/register") Register

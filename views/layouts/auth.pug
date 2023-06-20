@@ -1,5 +1,9 @@
 extends default
-block content
+block body
   .card
     .card-body
-      block content
+      .d-flex
+        .bg-auth.d-none.d-sm-block
+        .flex-grow-1.p-1
+          include ../components/alert
+          block content
