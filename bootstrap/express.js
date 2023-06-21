@@ -5,7 +5,7 @@ const ms = require("ms");
 const isProd = require("../utils/isProd");
 const flash = require("connect-flash");
 const useErrorHandler = require("./useErrorHandler");
-
+const passport = require("passport");
 const app = express();
 const sessionOptins = {
   secret: process.env.SECRET_KEY,
@@ -25,7 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session(sessionOptins));
 app.use(flash());
-app.use(require("../bootstrap/useFlash")); // global flash variable
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(require("../bootstrap/useGlobaldata")); // global flash variable
 app.use("/public", express.static(path.join(__dirname, "../public")));
 require("./useRouters")(app);
 app.use(useErrorHandler);

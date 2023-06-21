@@ -13,6 +13,7 @@ const app = require("./bootstrap/express");
 const startApp = async () => {
   try {
     await connectDB();
+    require("./bootstrap/usePassport");
     app.listen(PORT, () => {
       console.log(`Express Start at http://localhost:${PORT}`);
     });
