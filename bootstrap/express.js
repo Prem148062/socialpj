@@ -6,8 +6,10 @@ const isProd = require("../utils/isProd");
 const flash = require("connect-flash");
 const useErrorHandler = require("./useErrorHandler");
 const passport = require("passport");
+const redisStore = require("./useRedisConnect");
 const app = express();
 const sessionOptins = {
+  store: redisStore,
   secret: process.env.SECRET_KEY,
   cookie: {
     httpOnly: true,

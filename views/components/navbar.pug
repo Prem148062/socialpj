@@ -1,0 +1,26 @@
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+  .container
+    a.navbar-brand(href="/") Social
+    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#mainNav")
+      span.navbar-toggler-icon
+    #mainNav.collapse.navbar-collapse
+      ul.navbar-nav.me-auto
+        li.nav-item
+          a.nav-link(href="/profile") About
+      ul.navbar-nav
+        if !auth
+          li.nav-item
+            a.nav-link(href="/auth/login") Login
+          li.nav-item
+            a.btn.btn-primary.ms-2(href="/auth/register") Register
+        else
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle(href="#" data-bs-toggle="dropdown")= auth.email
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href=`/profile/${auth._id}`) My Profile
+              li
+                a.dropdown-item(href="/profile/edit") Edit Profile
+              li.dropdown-divider
+              li
+                a.dropdown-item(href="/auth/logout") Logout
