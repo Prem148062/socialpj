@@ -1,0 +1,30 @@
+extends ../layouts/feed
+block content
+  h1 EDIT PROFILE
+  hr
+  .card
+    .card-body
+      form.row(action="/profile?_method=put" method="post" enctype="multipart/form-data")
+        .col-12.col-md-6
+          label.form-label(for="inputAvatar") Image profile
+          input#inputAvatar.form-control(type="file" name="avatar" accept="image/*")
+        .col-12.col-md-6
+          .mb-3
+            label.form-label(for="inputDisplayName") DisplayName
+            input#inputDisplayName.form-control(type="text" name="displayName" value=auth.displayName maxlength="50")
+          .mb-3
+            label.form-label(for="inputBirthDate") BirthDate
+            input#inputBirthDate.form-control(type="date" name="birthDate" value=auth.birthDate)
+          .mb-3
+            label.form-label.me-3 Gender
+            label.form-check.form-check-inline
+              span.form-check-label Male
+              input.form-check-input(type="radio" name="gender" value="male" checked)
+            label.form-check.form-check-inline
+              span.form-check-label Female
+              input.form-check-input(type="radio" name="gender" value="female")
+            label.form-check.form-check-inline
+              span.form-check-label None
+              input.form-check-input(type="radio" name="gender" value="none")
+          .col-12.d-flex.justify-content-end
+            button.btn.btn-primary Edit

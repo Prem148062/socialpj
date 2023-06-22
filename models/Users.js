@@ -12,6 +12,20 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    displayName: {
+      type: String,
+    },
+    birthDate: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      enum: ["male", "female", "none"],
+      default: "none",
+    },
+    avatar: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

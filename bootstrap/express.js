@@ -7,6 +7,7 @@ const flash = require("connect-flash");
 const useErrorHandler = require("./useErrorHandler");
 const passport = require("passport");
 const redisStore = require("./useRedisConnect");
+const methodOverride = require("method-override");
 const app = express();
 const sessionOptins = {
   store: redisStore,
@@ -30,6 +31,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require("../bootstrap/useGlobaldata")); // global flash variable
+app.use(methodOverride("_method"));
 app.use("/public", express.static(path.join(__dirname, "../public")));
 require("./useRouters")(app);
 app.use(useErrorHandler);

@@ -7,17 +7,17 @@ block content
   hr
   form(action="/auth/register" method="post")
     .mb-3
-      label#inputEmail.form-label
+      label.form-label(for="inputEmail")
         i.bi.bi-envelope
         span.ms-1 Email Addrees:
       input#inputEmail.form-control(type="email" name="email" required placeholder="Enter Your Email Address")
     .mb-3
-      label#inputPassword.form-label
+      label.form-label(for="inputPassword")
         i.bi.bi-key
         span.ms-1 Password:
       input#inputPassword.form-control(type="password" name="password" required placeholder="Enter Your Password")
     .mb-3
-      label#inputConfirmPassword.form-label
+      label.form-label(for="inputConfirmPassword")
         i.bi.bi-key
         span.ms-1 ConfirmPassword:
       input#inputConfirmPassword.form-control(type="password" name="cfpassword" required placeholder="Enter Your Verify Password Again")
