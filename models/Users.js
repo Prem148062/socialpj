@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
+const { DateTime } = require("luxon");
 const bcrypt = require("bcrypt");
+const { faker } = require("@faker-js/faker");
 
 const schema = new Schema(
   {
@@ -12,19 +14,35 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      default: () => `${faker.string.alphanumeric(20)}`,
+    },
     displayName: {
       type: String,
     },
     birthDate: {
       type: Date,
+      get: function (date) {
+        const d = DateTime.fromJSDate(date);
+        return d.toISODate();
+      },
     },
     gender: {
       type: String,
       enum: ["male", "female", "none"],
       default: "none",
     },
-    avatar: {
+    avatarUrl: {
       type: String,
+      get: function (url) {
+        if (!url) {
+          return `https://via.placeholder.com/150`;
+        }
+        return url;
+      },
     },
   },
   { timestamps: true }

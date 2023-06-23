@@ -18,7 +18,7 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
             a.nav-link.dropdown-toggle(href="#" data-bs-toggle="dropdown")= auth.email
             ul.dropdown-menu
               li
-                a.dropdown-item(href=`/profile/${auth._id}`) My Profile
+                a.dropdown-item(href=`/profile/${auth.username}`) My Profile
               li
                 a.dropdown-item(href="/profile/edit") Edit Profile
               li.dropdown-divider

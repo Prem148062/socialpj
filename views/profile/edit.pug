@@ -6,9 +6,13 @@ block content
     .card-body
       form.row(action="/profile?_method=put" method="post" enctype="multipart/form-data")
         .col-12.col-md-6
+          img.d-block.mx-auto.mb-3.rounded-circle.shadow(src=auth.avatarUrl, alt=auth._id)
           label.form-label(for="inputAvatar") Image profile
           input#inputAvatar.form-control(type="file" name="avatar" accept="image/*")
-        .col-12.col-md-6
+        .col-12.col-md-6.mt-3.mt-md-0
+          .mb-3
+            label.form-label(for="inputUsername") Username URL
+            input#inputUsername.form-control(type="text" name="username" value=auth.username maxlength="50")
           .mb-3
             label.form-label(for="inputDisplayName") DisplayName
             input#inputDisplayName.form-control(type="text" name="displayName" value=auth.displayName maxlength="50")
@@ -19,12 +23,12 @@ block content
             label.form-label.me-3 Gender
             label.form-check.form-check-inline
               span.form-check-label Male
-              input.form-check-input(type="radio" name="gender" value="male" checked)
+              input.form-check-input(type="radio" name="gender" value="male" checked=auth.gender === 'male')
             label.form-check.form-check-inline
               span.form-check-label Female
-              input.form-check-input(type="radio" name="gender" value="female")
+              input.form-check-input(type="radio" name="gender" value="female" checked=auth.gender === 'female')
             label.form-check.form-check-inline
               span.form-check-label None
-              input.form-check-input(type="radio" name="gender" value="none")
+              input.form-check-input(type="radio" name="gender" value="none" checked=auth.gender === 'none' || !auth.gender)
           .col-12.d-flex.justify-content-end
             button.btn.btn-primary Edit
