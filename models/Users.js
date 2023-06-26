@@ -48,15 +48,23 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-const preSetPassword = async function (next) {
-  if (this.isModified("password")) {
+const preSetPassword = async function (next, docs) {
+  if (this.isModified && this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, +process.env.SALT_ROUNDS);
+  }
+  if (Array.isArray(docs)) {
+    docs = await Promise.all(
+      docs.map(async (doc) => {
+        doc.password = await bcrypt.hash(doc.password, +process.env.SALT_ROUND);
+      })
+    );
   }
   next();
 };
 
 schema.pre("save", preSetPassword);
 schema.pre("updateOne", preSetPassword);
+schema.pre("insertMany", preSetPassword);
 schema.methods.comparePassword = async function (password) {
   // binding this
   const result = await bcrypt.compare(password, this.password);
