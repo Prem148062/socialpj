@@ -16,5 +16,6 @@ for (let i = 0; i < process.env.SEED_USERS; i++) {
 }
 
 module.exports = async () => {
-  await Users.insertMany(users);
+  const result = await Users.insertMany(users);
+  return result;
 };

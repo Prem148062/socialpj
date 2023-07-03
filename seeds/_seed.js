@@ -4,6 +4,8 @@ require("dotenv").config({
   path: path.join(__dirname, "../.env.dev"),
 });
 const seedUsers = require("./users");
+const seedPosts = require("./posts");
+const seedComments = require("./comments");
 const mongodbConnet = require("../bootstrap/mongodbConnet");
 const seedDeleteAll = require("./deleteAll");
 
@@ -14,7 +16,12 @@ async function run() {
     console.log(`------> DELETED DATA.`);
     await seedDeleteAll();
   }
-  await seedUsers();
+  console.log(`------> INSERT USERS.`);
+  const users = await seedUsers();
+  console.log(`------> INSERT POSTS.`);
+  const posts = await seedPosts(users);
+  console.log(`------> INSERT COMMENTS.`);
+  await seedComments(users, posts);
   console.log(`------> INSERT DATA.`);
   console.log(`END -------->`);
   process.exit(0);
