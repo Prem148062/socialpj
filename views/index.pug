@@ -19,7 +19,7 @@ block content
             p= post.body
             div= post.createdAt
             .d-flex
-              button.ms-auto.mt-3.btn.btn-sm.btn-outline-primary
+              a.ms-auto.mt-3.btn.btn-sm.btn-outline-primary(href=`/like/posts/${post._id}`)
                 i.bi.bi-hand-thumbs-up
                 span= post.likes
             if auth
@@ -35,6 +35,6 @@ block content
                     img.me-3.mini-avatar(src=comment.user.avatarUrl alt=comment.user.username)
                   .flex-grow-1= comment.body
               .d-flex
-                button.ms-auto.mt-3.btn.btn-sm.btn-outline-primary
+                a.ms-auto.mt-3.btn.btn-sm.btn-outline-primary(href=`/like/comments/${comment._id}`)
                   i.bi.bi-hand-thumbs-up
                   span= comment.likes
