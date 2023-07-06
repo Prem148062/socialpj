@@ -15,21 +15,10 @@ const commentSchema = new Schema(
     onModel: {
       type: String,
       required: true,
-      enum: ["Posts"],
-    },
-    body: {
-      type: String,
-      required: true,
-      maxLength: 5000,
+      enum: ["Posts", "Comments"],
     },
   },
   { timestamps: true }
 );
-commentSchema.virtual("likes", {
-  ref: "Likes",
-  localField: "_id",
-  foreignField: "modelId",
-  count: true,
-});
 
-module.exports = model("Comments", commentSchema);
+module.exports = model("Likes", commentSchema);

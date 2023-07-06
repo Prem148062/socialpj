@@ -74,4 +74,10 @@ schema.methods.comparePassword = async function (password) {
   return result;
 };
 
+schema.virtual("posts", {
+  ref: "Posts",
+  localField: "_id",
+  foreignField: "user",
+});
+
 module.exports = model("Users", schema);

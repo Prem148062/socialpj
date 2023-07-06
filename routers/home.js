@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const home = require("../controllers/home/index");
+const getIndex = require("../controllers/index/getIndex");
+const newPosts = require("../controllers/index/newPosts");
 
-router.get("/", home);
-
+router.get("/", getIndex);
+router.post("/post", newPosts);
 module.exports = router;

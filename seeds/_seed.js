@@ -6,6 +6,7 @@ require("dotenv").config({
 const seedUsers = require("./users");
 const seedPosts = require("./posts");
 const seedComments = require("./comments");
+const seedLike = require("./likes");
 const mongodbConnet = require("../bootstrap/mongodbConnet");
 const seedDeleteAll = require("./deleteAll");
 
@@ -21,7 +22,18 @@ async function run() {
   console.log(`------> INSERT POSTS.`);
   const posts = await seedPosts(users);
   console.log(`------> INSERT COMMENTS.`);
-  await seedComments(users, posts);
+  const comments = await seedComments(users, posts);
+  console.log(`------> INSERT LIKES.`);
+  await seedLike(users, [
+    {
+      model: "Posts",
+      data: posts,
+    },
+    {
+      model: "Comments",
+      data: comments,
+    },
+  ]);
   console.log(`------> INSERT DATA.`);
   console.log(`END -------->`);
   process.exit(0);

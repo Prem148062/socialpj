@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
-
-const postSchema = new Schema(
+const schema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -10,10 +9,23 @@ const postSchema = new Schema(
     body: {
       type: String,
       required: true,
-      maxLength: 1000,
+      maxlength: 10000,
     },
   },
   { timestamps: true }
 );
 
-module.exports = model("Posts", postSchema);
+schema.virtual("comments", {
+  ref: "Comments",
+  localField: "_id",
+  foreignField: "modelId",
+});
+
+schema.virtual("likes", {
+  ref: "Likes",
+  localField: "_id",
+  foreignField: "modelId",
+  count: true,
+});
+
+module.exports = model("Posts", schema);

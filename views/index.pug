@@ -2,4 +2,33 @@ extends layouts/feed
 
 block content
   h1 Welcome Home
-  p= auth
+  if auth
+    if auth
+    form.mt-3(action="/post" method="post")
+      .mb-3
+        textarea.form-control(name="body" placeholder="........" required)
+      button.btn.btn-primary Posts.
+  each post in posts
+    .card.my-3
+      .card-body
+        .d-flex
+          div
+            a(href=`/profile/${post.user.username}`)
+              img.me-3.mini-avatar(src=post.user.avatarUrl alt=post.user.username)
+          .flex-grow-1
+            p= post.body
+            div= post.createdAt
+            .d-flex
+              button.ms-auto.mt-3.btn.btn-sm.btn-outline-primary
+                i.bi.bi-hand-thumbs-up
+                span= post.likes
+            each comment in post.comments
+              .d-flex.mt-3.pt-3.border-top
+                div
+                  a(href=`/profile/${comment.user.username}`)
+                    img.me-3.mini-avatar(src=comment.user.avatarUrl alt=comment.user.username)
+                  .flex-grow-1= comment.body
+              .d-flex
+                button.ms-auto.mt-3.btn.btn-sm.btn-outline-primary
+                  i.bi.bi-hand-thumbs-up
+                  span= comment.likes

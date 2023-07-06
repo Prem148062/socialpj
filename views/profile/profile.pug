@@ -2,9 +2,19 @@ extends ../layouts/feed
 
 block content
   .row
-    .col-12.col-md-6.col-lg-4
+    .col-12.col-md-4.col-lg-3
       .card
         .card-body
-          img.d-block.mx-auto.mb-3.rounded-circle.shadow(src=user.avatarUrl, alt=user.username)
+          img.d-block.mx-auto.shadow.mb-3.rounded-circle(src=user.avatarUrl alt=user.username)
           h2.h5= user.displayName
           p.text-secondary= user.username
+          if auth && auth.username == user.username
+            .d-grid
+              a.btn.btn-primary(href="/profile/edit") แก้ไขโปรไฟล์
+    .col-12.col-md-8.col-lg-9
+      h2.mt-4.mt-md-0 โพสต์จากผู้ใช้งาน
+      each post in user.posts
+        .card.my-3
+          .card-body
+            p= post.body
+            div= post.createdAt
