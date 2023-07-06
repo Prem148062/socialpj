@@ -22,6 +22,12 @@ block content
               button.ms-auto.mt-3.btn.btn-sm.btn-outline-primary
                 i.bi.bi-hand-thumbs-up
                 span= post.likes
+            if auth
+              form.mt-3(action=`/post/comment/${post._id}` method="post")
+                .mb-1
+                  textarea.form-control(name="body" placeholder="comments..." required)
+                .d-flex
+                  button.ms-auto.btn.btn-sm.btn-primary comment.
             each comment in post.comments
               .d-flex.mt-3.pt-3.border-top
                 div
